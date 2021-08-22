@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>mx.com.chux.cs.ds.list</groupId>
@@ -9,9 +9,8 @@
   <version>1.0.0</version>
 
   <name>singly-linked-list</name>
-  <description>A simple singly-linked-list.</description>
-  <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
+  <description>singly-linked-list</description>
+  <url>http://192.168.1.100:9999/git/CompSci/ds-singly-linked-list</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
