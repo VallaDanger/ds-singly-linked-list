@@ -26,16 +26,10 @@ pipeline {
         
                 echo 'Building Branch: ' + GIT_LOCAL_BRANCH
         
-                withEnv(
-                    [
-                        "TARGET_BRANCH = ${GIT_LOCAL_BRANCH}"
-                    ]
-                ){
-                    git poll: false,
-                        branch: "${env.TARGET_BRANCH}",
+                git poll: false,
+                        branch: "${GIT_LOCAL_BRANCH}",
                         credentialsId: 'GIT_SSH',
                         url: 'ssh://git@192.168.1.100:3322/CompSci/ds-singly-linked-list.git'
-                 }
                  
             }
                 
