@@ -2,10 +2,17 @@ pipeline {
     agent { 
         label "linux" 
     }
+    
     tools { 
         maven 'maven-3'
         jdk 'java-8'
     }
+    
+    environment {
+        GIT_BRANCH_REF = "${GIT_BRANCH}"
+        GIT_LOCAL_BRANCH = "${GIT_BRANCH}"
+    }
+    
     stages { 
         
         stage ('clone') {
@@ -13,14 +20,13 @@ pipeline {
             steps {
         
                 script {
-                    def gitBranch = "$GIT_BRANCH"
-                    def gitLocalBranch = gitBranch.replace("refs/heads/", "") 
+                    GIT_LOCAL_BRANCH = GIT_BRANCH_REF.replace("refs/heads/", "") 
                 }
         
-                sh "echo ${gitLocalBranch}"
+                echo 'Building Branch: ' + GIT_LOCAL_BRANCH
         
                 git poll: false,
-                    branch: "${gitLocalBranch}",
+                    branch: "${GIT_LOCAL_BRANCH}",
                     credentialsId: 'GIT_SSH',
                     url: 'ssh://git@192.168.1.100:3322/CompSci/ds-singly-linked-list.git'
             }
