@@ -20,7 +20,8 @@ pipeline {
             steps {
         
                 script {
-                    GIT_LOCAL_BRANCH = GIT_BRANCH_REF.replace("refs/heads/", "") 
+                    GIT_LOCAL_BRANCH = GIT_BRANCH_REF.replace("refs/heads/", "")
+                    GIT_LOCAL_BRANCH = GIT_LOCAL_BRANCH.replace("origin/", "")
                 }
         
                 echo 'Building Branch: ' + GIT_LOCAL_BRANCH
