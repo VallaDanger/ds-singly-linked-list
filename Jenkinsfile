@@ -13,7 +13,7 @@ pipeline {
             steps {
         
                 git poll: false,
-                    branch: $GIT_BRANCH,
+                    branch: "$GIT_BRANCH",
                     credentialsId: 'GIT_SSH',
                     url: 'ssh://git@192.168.1.100:3322/CompSci/ds-singly-linked-list.git'
             }
