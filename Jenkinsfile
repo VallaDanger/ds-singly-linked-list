@@ -32,7 +32,7 @@ pipeline {
                     ]
                 ){
                     git poll: false,
-                        branch: "${TARGET_BRANCH}",
+                        branch: "${env.TARGET_BRANCH}",
                         credentialsId: 'GIT_SSH',
                         url: 'ssh://git@192.168.1.100:3322/CompSci/ds-singly-linked-list.git'
                  }
