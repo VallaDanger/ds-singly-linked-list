@@ -20,5 +20,11 @@ public class SingleLinkNode<E> extends Node<E> {
         this.next = next;
         return this;
     }
+
+    SingleLinkNode<E> disconnect() {
+        final SingleLinkNode<E> next = this.next;
+        this.next = null;
+        return next;
+    }
     
 }
