@@ -12,8 +12,15 @@ pipeline {
             
             steps {
         
+                script {
+                    def gitBranch = "$GIT_BRANCH"
+                    def gitLocalBranch = gitBranch.replace("refs/heads/", "") 
+                }
+        
+                sh "echo ${gitLocalBranch}"
+        
                 git poll: false,
-                    branch: "${GIT_LOCAL_BRANCH}",
+                    branch: "${gitLocalBranch}",
                     credentialsId: 'GIT_SSH',
                     url: 'ssh://git@192.168.1.100:3322/CompSci/ds-singly-linked-list.git'
             }
