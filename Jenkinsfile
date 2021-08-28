@@ -45,13 +45,13 @@ pipeline {
                         artifactsPublisher(disabled: true), 
                         findbugsPublisher(disabled: true), 
                         openTasksPublisher(disabled: true),
-                        jacocoPublisher(disabled: true),
+                        jacocoPublisher(disabled: false),
                         dependenciesFingerprintPublisher(disabled: true),
                         junitPublisher(disabled: true),
                         spotbugsPublisher(disabled: true)
                     ]
                 ){
-                  sh "mvn -e -ntp clean verify"
+                  sh "mvn -e -ntp clean verify sonar:sonar package deploy"
                 }
                 
             }
