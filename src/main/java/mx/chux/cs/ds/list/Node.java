@@ -1,4 +1,4 @@
-package mx.com.chux.cs.ds.list;
+package mx.chux.cs.ds.list;
 
 import java.util.function.Supplier;
 

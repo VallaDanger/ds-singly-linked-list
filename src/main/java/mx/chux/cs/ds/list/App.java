@@ -1,4 +1,4 @@
-package mx.com.chux.cs.ds.list;
+package mx.chux.cs.ds.list;
 
 public class App {
     public static void main( String[] args ) {
