@@ -27,18 +27,16 @@ pipeline {
                 echo 'Building Branch: ' + GIT_LOCAL_BRANCH
         
                 git poll: false,
-                        branch: "${GIT_LOCAL_BRANCH}",
-                        credentialsId: 'GIT_SSH',
-                        url: 'ssh://git@192.168.1.100:3322/CompSci/ds-singly-linked-list.git'
+                          branch: "${GIT_LOCAL_BRANCH}",
+                          credentialsId: 'GIT_SSH',
+                          url: 'ssh://git@pi4.chux.net:3322/gerrit/ds-singly-linked-list.git'
                  
             }
                 
         }
         
         stage ('verify') {
-            
             steps {
-            
                 withMaven (
                     maven: 'maven-3',
                     options: [
@@ -51,11 +49,60 @@ pipeline {
                         spotbugsPublisher(disabled: true)
                     ]
                 ){
-                  sh "mvn -e -ntp clean verify sonar:sonar package deploy"
+                    sh "mvn -e -ntp clean verify"
                 }
-                
             }
-            
         }
+
+        stage('sonar') {
+        
+            steps {
+                withSonarQubeEnv(installationName: 'sonar') {
+                    withMaven (
+                        maven: 'maven-3',
+                        options: [
+                            artifactsPublisher(disabled: true), 
+                            findbugsPublisher(disabled: true), 
+                            openTasksPublisher(disabled: true),
+                            jacocoPublisher(disabled: true),
+                            dependenciesFingerprintPublisher(disabled: true),
+                            junitPublisher(disabled: true),
+                            spotbugsPublisher(disabled: true)
+                        ]
+                    ){
+                        sh "mvn -e -ntp sonar:sonar"
+                    }
+                }
+            }
+
+        }
+
+        stage("quality") {
+            steps {
+                timeout(time: 5, unit: 'MINUTES') {
+                    waitForQualityGate abortPipeline: true
+                }
+            }
+        }
+
+        stage('deploy') {
+            steps {
+                withMaven (
+                    maven: 'maven-3',
+                    options: [
+                        artifactsPublisher(disabled: true), 
+                        findbugsPublisher(disabled: true), 
+                        openTasksPublisher(disabled: true),
+                        jacocoPublisher(disabled: true),
+                        dependenciesFingerprintPublisher(disabled: true),
+                        junitPublisher(disabled: true),
+                        spotbugsPublisher(disabled: true)
+                    ]
+                ){
+                    sh "mvn -e -ntp -DskipTests=true -Dmaven.skip.test=true clean deploy"
+                }
+            }
+        }
+
     }
 }
