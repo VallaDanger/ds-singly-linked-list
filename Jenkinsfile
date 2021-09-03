@@ -114,12 +114,12 @@ pipeline {
                         [
                             $class: 'StringParameterValue', 
                             name: 'GROK_PROJECT', 
-                            value: 'cs-puzzles'
+                            value: 'cd-data-structures'
                         ],
                         [
                             $class: 'StringParameterValue', 
                             name: 'GIT_REPOSITORY', 
-                            value: 'pzl-longest-common-substring'
+                            value: 'ds-singly-linked-list'
                         ],
                         [
                             $class: 'StringParameterValue', 
