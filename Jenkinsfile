@@ -114,7 +114,7 @@ pipeline {
                         [
                             $class: 'StringParameterValue', 
                             name: 'GROK_PROJECT', 
-                            value: 'cd-data-structures'
+                            value: 'cs-data-structures'
                         ],
                         [
                             $class: 'StringParameterValue', 
