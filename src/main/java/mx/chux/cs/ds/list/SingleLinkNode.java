@@ -8,7 +8,7 @@ public class SingleLinkNode<E> extends Node<E> {
         super(value);
     }
     
-    SingleLinkNode<E> next() {
+    public SingleLinkNode<E> next() {
         return this.next;
     }
     

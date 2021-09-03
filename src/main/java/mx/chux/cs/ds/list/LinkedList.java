@@ -1,17 +1,19 @@
 package mx.chux.cs.ds.list;
 
-public class LinkedList<E> {
+import java.util.function.Supplier;
+
+public class LinkedList<E> implements Supplier<SingleLinkNode<E>> {
     
     private final int maxSize;
     
     private SingleLinkNode<E> root;
     private int size;
     
-    protected LinkedList() {
+    public LinkedList() {
         this(Integer.MAX_VALUE);
     }
 
-    protected LinkedList(int maxSize) {
+    public LinkedList(int maxSize) {
         
         if( maxSize <= 0 ) {
             throw new IllegalArgumentException("max-size must be greater than 0");
@@ -24,6 +26,10 @@ public class LinkedList<E> {
 
     public int size() {
         return this.size;
+    }
+
+    public SingleLinkNode<E> get() {
+        return this.root;
     }
 
     public LinkedList<E> add(E value) {
