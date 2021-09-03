@@ -105,4 +105,48 @@ pipeline {
         }
 
     }
+
+    post {
+    
+        success {
+            build   job: '/CHUX/update-grok', 
+                    parameters: [
+                        [
+                            $class: 'StringParameterValue', 
+                            name: 'GROK_PROJECT', 
+                            value: 'cs-puzzles'
+                        ],
+                        [
+                            $class: 'StringParameterValue', 
+                            name: 'GIT_REPOSITORY', 
+                            value: 'pzl-longest-common-substring'
+                        ],
+                        [
+                            $class: 'StringParameterValue', 
+                            name: 'GIT_BRANCH', 
+                            value: "${GIT_LOCAL_BRANCH}"
+                        ]
+                    ]
+            build   job: '/CHUX/update-code', 
+                    parameters: [
+                        [
+                            $class: 'StringParameterValue', 
+                            name: 'CODE_PROJECT', 
+                            value: 'compsci/data-structures/list'
+                        ],
+                        [
+                            $class: 'StringParameterValue', 
+                            name: 'GIT_REPOSITORY', 
+                            value: 'ds-singly-linked-list'
+                        ],
+                        [
+                            $class: 'StringParameterValue', 
+                            name: 'GIT_BRANCH', 
+                            value: "${GIT_LOCAL_BRANCH}"
+                        ]
+                    ]
+        }
+
+    }
+
 }
